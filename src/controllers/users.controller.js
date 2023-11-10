@@ -65,10 +65,7 @@ export const editUser = async (req,res)=>{
             password
         }
         const userSaved = await Users.update(newUser,{where:{id}})
-        res.status(200).json({
-            name: userSaved.name,
-            email: userSaved.email,
-        })
+        res.json(userSaved)
 
     } catch (error) {
         res.status(500).json([`Ocurrio un error: ${error.message}`])
@@ -83,6 +80,7 @@ export const deleteUser = async (req,res)=>{
             return res.status(400).json([`No se encontro el usuario`])
         }
         const userDeleted = await Users.destroy({where: {id}})
+        res.json(userDeleted)
     } catch (error) {
         res.status(500).json([`Ocurrio un error: ${error.message}`])
     }
